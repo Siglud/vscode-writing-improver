@@ -1,0 +1,125 @@
+{
+    "name": "writing-improver",
+    "displayName": "writing-improver",
+    "description": "improve your docs and comment with AI",
+    "version": "0.0.1",
+    "author": {
+        "name": "Siglud",
+        "email": "Siglud@gmail.com"
+    },
+    "publisher": "Siglud",
+    "engines": {
+        "vscode": "^1.77.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [],
+    "icon": "img/logo.png",
+    "main": "./out/extension.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Siglud/vscode-writing-improver"
+    },
+    "keywords": [
+        "vscode",
+        "extension",
+        "writing",
+        "improver",
+        "OpenAI"
+    ],
+    "contributes": {
+        "commands": [
+            {
+                "command": "writing-improver.showContextMenu",
+                "title": "improve writing"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "writing-improver.showContextMenu",
+                    "title": "improve writing",
+                    "group": "z_commands"
+                }
+            ]
+        },
+        "configuration": {
+            "type": "object",
+            "title": "Writing Improver",
+            "properties": {
+                "writing-improver.APIType": {
+                    "type": "string",
+                    "default": "OpenAI",
+                    "enum": [
+                        "OpenAI",
+                        "Azure"
+                    ],
+                    "description": "Writing Improver API type",
+                    "enumDescriptions": [
+                        "Use OpenAI API Service",
+                        "Use Azure OpenAI Service"
+                    ]
+                },
+                "writing-improver.APIKey": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Go to the Azure OpenAI or OpenAI Service page to get your API Key."
+                },
+                "writing-improver.API": {
+                    "type": "string",
+                    "default": "https://api.openai.com/v1/chat/completions",
+                    "description": "API request URL. If you use Azure OpenAI Service, text-davinci-003 model is recommended. You can find the API URL in the Azure OpenAI studio."
+                },
+                "writing-improver.model": {
+                    "type": "string",
+                    "default": "gpt-3.5-turbo",
+                    "enum": [
+                        "gpt-3.5-turbo",
+                        "gpt-3.5-turbo-0301",
+                        "gpt-4",
+                        "gpt-4-0314",
+                        "gpt-4-32k",
+                        "gpt-4-32k-0314"
+                    ],
+                    "description": "API version, Only worked with OpenAI API Service"
+                },
+                "writing-improver.systemPrompt": {
+                    "type": "string",
+                    "default": "Revise the following sentences to make them more clear, concise, and coherent.",
+                    "description": "Prompt that send as system"
+                },
+                "writing-improver.userPrompt": {
+                    "type": "string",
+                    "default": "polish this text in Engliish",
+                    "description": "Prompt that send as user"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts",
+        "test": "jest"
+    },
+    "devDependencies": {
+        "@jest/globals": "^29.5.0",
+        "@types/glob": "^8.1.0",
+        "@types/mocha": "^10.0.1",
+        "@types/node": "16.x",
+        "@types/vscode": "^1.77.0",
+        "@typescript-eslint/eslint-plugin": "^5.59.0",
+        "@typescript-eslint/parser": "^5.59.0",
+        "@vscode/test-electron": "^2.3.0",
+        "eslint": "^8.39.0",
+        "glob": "^10.2.2",
+        "jest": "^29.5.0",
+        "mocha": "^10.2.0",
+        "ts-jest": "^29.1.0",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.0.4"
+    }
+}
